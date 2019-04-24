@@ -27,8 +27,8 @@ repositories {
 }
 
 dependencies {
-    compile group: 'org.tensorflow', name: 'tensorflow', version: '1.6.0'
-    compile group: 'org.tensorflow', name: 'libtensorflow', version: '1.6.0'
+    compile group: 'org.tensorflow', name: 'tensorflow', version: '1.13.1'
+    compile group: 'org.tensorflow', name: 'libtensorflow', version: '1.13.1'
 
     // Please read the requirements for the GPU support here: https://www.tensorflow.org/install/install_java
     // compile group: 'org.tensorflow', name: 'libtensorflow_jni_gpu', version: '1.6.0'
