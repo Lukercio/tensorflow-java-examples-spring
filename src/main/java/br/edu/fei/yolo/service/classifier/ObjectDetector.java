@@ -20,6 +20,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.opencv.core.Mat;
+
 /**
  * ObjectDetector class to detect objects using pre-trained models with TensorFlow Java API.
  */
@@ -49,6 +51,7 @@ public class ObjectDetector {
      */
     public Map<String, Object> detect(final String imageLocation) {
         byte[] image = IOUtil.readAllBytesOrExit(imageLocation);
+
         try (Tensor<Float> normalizedImage = normalizeImage(image)) {
             List<Recognition> recognitions = YOLOClassifier.getInstance().classifyImage(executeYOLOGraph(normalizedImage), LABELS);
             printToConsole(recognitions);
@@ -61,6 +64,36 @@ public class ObjectDetector {
         }
     }
 
+    /**
+     * Detect objects on the given image
+     * @param img the location of the image
+     * @return a map with location of the labeled image and recognitions
+     */
+    public Map<String, Object> detect(final Mat img) {
+
+        byte[] image = new byte[(int) (img.total() *
+                img.channels())];
+
+        System.out.println("Converteu");
+        //img.get(0, 0, image);
+
+       // byte[] image = IOUtil.readAllBytesOrExit(img);
+
+        try (Tensor<Float> normalizedImage = normalizeImage(image)) {
+
+            System.out.println("normalizou");
+
+
+            List<Recognition> recognitions = YOLOClassifier.getInstance().classifyImage(executeYOLOGraph(normalizedImage), LABELS);
+            printToConsole(recognitions);
+            //String labeledFilePath = ImageUtil.getInstance(applicationProperties).labelImage(image, recognitions, IOUtil.getFileName(imageLocation));
+
+            Map<String, Object> result = new HashMap();
+            //result.put("labeledFilePath", labeledFilePath);
+            result.put("recognitions", recognitions);
+            return result;
+        }
+    }
     /**
      * Pre-process input. It resize the image and normalize its pixels
      * @param imageBytes Input image

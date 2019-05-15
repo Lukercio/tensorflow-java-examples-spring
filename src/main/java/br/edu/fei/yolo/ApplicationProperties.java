@@ -14,7 +14,8 @@ public class ApplicationProperties {
     private String uploadDir;
     private Integer imageSize;
     private Float imageMean;
-    private String path = "C:\\Users\\Windows 10Pro\\IdeaProjects\\yolo-java\\src\\main\\";
+    //private String path = "C:\\Users\\Windows 10Pro\\IdeaProjects\\yolo-java\\src\\main\\";
+    private String path = "/home/ldlopes/Dropbox/Home/Projects/yolo-java/yolo-java/src/main/";
 
 
     private InputStream input;
@@ -23,7 +24,9 @@ public class ApplicationProperties {
 
     ApplicationProperties(){
         try {
-            input = new FileInputStream(path + "resources\\yolo.properties");
+            //input = new FileInputStream(path + "resources\\yolo.properties");
+            input = new FileInputStream(path + "resources/yolo.properties");
+
             prop.load(input);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -34,7 +37,9 @@ public class ApplicationProperties {
 
     ApplicationProperties(String path){
         try {
-            input = new FileInputStream(path + "resources\\yolo.properties");
+//            input = new FileInputStream(path + "resources\\yolo.properties");
+            input = new FileInputStream(path + "resources/yolo.properties");
+
             prop.load(input);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
